@@ -6,71 +6,129 @@
     <title>Curso de Desenvolvimento de Sistemas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Reset e estilos base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --dark-purple: #1a1029;
+            --medium-purple: #3d2b5c;
+            --light-purple: #6a4c93;
+            --accent: #8a5fd2;
+            --text-light: #f0e6ff;
+            --text-dark: #d9c7ff;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            background-color: var(--dark-purple);
+            color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Navegação */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(26, 16, 41, 0.95);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
         }
 
-        header {
-            background: linear-gradient(135deg, #2c3e50, #4a69bd);
+        .nav-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(145deg, var(--medium-purple), var(--light-purple));
             color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 76, 147, 0.3);
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .nav-btn:hover {
+            background: linear-gradient(145deg, var(--light-purple), var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 95, 210, 0.4);
         }
 
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        /* Seções com tela inteira */
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        section {
-            padding: 50px 0;
-            border-bottom: 1px solid #eaeaea;
+        /* Gradientes para cada seção */
+        #sobre-ds {
+            background: linear-gradient(135deg, #2d1b4e, #4a2a7c);
+        }
+
+        #ia {
+            background: linear-gradient(135deg, #3d2b5c, #6a4c93);
+        }
+
+        #setec {
+            background: linear-gradient(135deg, #4a2a7c, #8a5fd2);
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            z-index: 2;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
-            color: #2c3e50;
-            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: var(--text-light);
+            font-size: 2.8rem;
             position: relative;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
-            background: #4a69bd;
-            margin: 10px auto;
-            border-radius: 2px;
+            width: 120px;
+            height: 5px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 5px;
         }
 
+        /* Conteúdo da seção Sobre DS */
         .about-content {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
         }
 
         .about-text {
@@ -79,22 +137,30 @@
         }
 
         .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            text-align: justify;
         }
 
         .video-container {
             flex: 1;
             min-width: 300px;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
         }
 
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         .video-wrapper iframe {
@@ -106,50 +172,54 @@
             border: none;
         }
 
+        /* Cards Section */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            gap: 30px;
+            margin-top: 40px;
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-content {
-            padding: 25px;
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
         }
 
         .card-icon {
-            font-size: 2.5rem;
-            color: #4a69bd;
-            margin-bottom: 15px;
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
         }
 
         .card p {
-            color: #666;
+            color: var(--text-dark);
+            text-align: center;
         }
 
+        /* Projeto SETEC */
         .project-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
         }
 
@@ -159,77 +229,181 @@
         }
 
         .project-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            text-align: justify;
         }
 
         .project-image {
             flex: 1;
             min-width: 300px;
             text-align: center;
+            position: relative;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent);
+            border-radius: 15px;
+            z-index: -1;
         }
 
         .project-image img {
             max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
         }
 
         .features {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
+            gap: 25px;
+            margin-top: 40px;
         }
 
         .feature {
             flex: 1;
             min-width: 250px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
         .feature i {
-            color: #4a69bd;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
+        .feature h3 {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .feature p {
+            color: var(--text-dark);
+        }
+
+        /* Footer */
         footer {
-            background: #2c3e50;
+            background: var(--dark-purple);
             color: white;
             text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
+            padding: 40px 0;
         }
 
-        @media (max-width: 768px) {
+        footer p {
+            margin: 10px 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
             
             .about-content, .project-content {
                 flex-direction: column;
             }
             
+            .project-image::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 100px 20px 60px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
             .cards {
                 grid-template-columns: 1fr;
             }
+            
+            .features {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .card, .feature {
+                padding: 20px;
+            }
+        }
+
+        /* Animações extras */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .about-content, .cards, .project-content {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Indicador de seção ativa */
+        .active-section {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Curso de Desenvolvimento de Sistemas</h1>
-            <p>Explore o mundo da programação, inteligência artificial e inovação</p>
+    <!-- Navegação -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <button class="nav-btn" onclick="scrollToSection('sobre-ds')">Curso DS</button>
+            <button class="nav-btn" onclick="scrollToSection('ia')">Temas da IA</button>
+            <button class="nav-btn" onclick="scrollToSection('setec')">SETEC</button>
         </div>
-    </header>
+    </nav>
 
-    <main class="container">
-        <section id="sobre-ds">
+    <!-- Seção 1 - Sobre DS -->
+    <section id="sobre-ds" class="section">
+        <div class="section-content">
             <h2 class="section-title">O que é o curso de Desenvolvimento de Sistemas?</h2>
             <div class="about-content">
                 <div class="about-text">
@@ -243,54 +417,52 @@
                     </div>
                 </figure>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="ia">
+    <!-- Seção 2 - IA -->
+    <section id="ia" class="section">
+        <div class="section-content">
             <h2 class="section-title">Inteligência Artificial e seu impacto</h2>
             <div class="cards">
                 <div class="card">
-                    <div class="card-content">
-                        <div class="card-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3>IA Generativa</h3>
-                        <p>A IA Generativa é capaz de criar conteúdo original, incluindo textos, imagens, músicas e vídeos. Ela está revolucionando indústrias criativas e abrindo novas possibilidades para artistas, designers e desenvolvedores.</p>
+                    <div class="card-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
+                    <h3>IA Generativa</h3>
+                    <p>A IA Generativa é capaz de criar conteúdo original, incluindo textos, imagens, músicas e vídeos. Ela está revolucionando indústrias criativas e abrindo novas possibilidades.</p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-content">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Tendências da IA para o futuro</h3>
-                        <p>Nos próximos anos, veremos a IA se tornar mais contextual e personalizada, com avanços em aprendizado por reforço, IA explicável e sistemas capazes de entender e responder a emoções humanas.</p>
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
+                    <h3>Tendências da IA para o futuro</h3>
+                    <p>Nos próximos anos, veremos a IA se tornar mais contextual e personalizada, com avanços em aprendizado por reforço e sistemas capazes de entender emoções humanas.</p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-content">
-                        <div class="card-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>IA no cotidiano das pessoas</h3>
-                        <p>Assistentes virtuais, recomendações personalizadas, diagnósticos médicos e carros autônomos são exemplos de como a IA já está presente no nosso dia a dia, tornando tarefas mais eficientes e melhorando a qualidade de vida.</p>
+                    <div class="card-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
+                    <h3>IA no cotidiano das pessoas</h3>
+                    <p>Assistentes virtuais, recomendações personalizadas, diagnósticos médicos e carros autônomos são exemplos de como a IA já está presente no nosso dia a dia.</p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-content">
-                        <div class="card-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>IA para aprendizado</h3>
-                        <p>Ferramentas de IA personalizam o ensino, adaptando-se ao ritmo de cada aluno. Sistemas tutores inteligentes identificam dificuldades e oferecem conteúdos específicos, revolucionando a educação.</p>
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
+                    <h3>IA para aprendizado</h3>
+                    <p>Ferramentas de IA personalizam o ensino, adaptando-se ao ritmo de cada aluno. Sistemas tutores inteligentes identificam dificuldades e oferecem conteúdos específicos.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="setec">
+    <!-- Seção 3 - SETEC -->
+    <section id="setec" class="section">
+        <div class="section-content">
             <h2 class="section-title">Projeto para a SETEC</h2>
             <div class="project-content">
                 <div class="project-text">
@@ -317,17 +489,56 @@
                     </div>
                 </div>
                 <figure class="project-image">
-                    <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%234a69bd' width='400' height='300'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='20' x='50%25' y='50%25' text-anchor='middle'%3EProjeto SETEC%3C/text%3E%3C/svg%3E" alt="Ilustração do projeto para SETEC">
+                    <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='350' viewBox='0 0 500 350'%3E%3Crect fill='%234a2a7c' width='500' height='350'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='24' x='50%25' y='50%25' text-anchor='middle'%3EProjeto SETEC - Desenvolvimento de Jogos%3C/text%3E%3C/svg%3E" alt="Ilustração do projeto para SETEC">
                 </figure>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer>
-        <div class="container">
+        <div class="section-content">
             <p>Site desenvolvido para o curso de Desenvolvimento de Sistemas</p>
             <p>© 2023 - Todos os direitos reservados</p>
         </div>
     </footer>
+
+    <script>
+        // Função para rolagem suave até a seção
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Destacar botão de navegação ativo
+        const sections = document.querySelectorAll('.section');
+        const navButtons = document.querySelectorAll('.nav-btn');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(current)) {
+                    btn.classList.add('active');
+                    // Alterar estilo do botão ativo
+                    btn.style.background = 'linear-gradient(145deg, var(--accent), var(--light-purple))';
+                    btn.style.boxShadow = '0 6px 20px rgba(138, 95, 210, 0.6)';
+                } else {
+                    btn.style.background = 'linear-gradient(145deg, var(--medium-purple), var(--light-purple))';
+                    btn.style.boxShadow = '0 4px 15px rgba(106, 76, 147, 0.3)';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
