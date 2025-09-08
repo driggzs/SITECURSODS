@@ -246,6 +246,63 @@
             line-height: 1.7;
         }
 
+        /* Novos estilos para os vídeos na seção IA */
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(142, 78, 255, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--light-purple), var(--accent));
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(107, 45, 224, 0.3);
+        }
+
+        .video-card h3 {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .small-video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .small-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* Projeto SETEC */
         .project-content {
             display: grid;
@@ -502,7 +559,7 @@
                 </div>
                 <figure class="video-container animated delay-2">
                     <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/4W4P0ytBHaY" title="Vídeo sobre o curso de Desenvolvimento de Sistemas" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/14ZiEr279hQ" title="Vídeo sobre o curso de Desenvolvimento de Sistemas" allowfullscreen></iframe>
                     </div>
                 </figure>
             </div>
@@ -515,36 +572,36 @@
         <div class="section-content">
             <h2 class="section-title animated">Inteligência Artificial e seu impacto</h2>
             <div class="cards">
-                <div class="card animated delay-1">
-                    <div class="card-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
+                <div class="video-card animated delay-1">
                     <h3>IA Generativa</h3>
-                    <p>A IA Generativa é capaz de criar conteúdo original, incluindo textos, imagens, músicas e vídeos. Ela está revolucionando indústrias criativas e abrindo novas possibilidades.</p>
+                    <div class="small-video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/CY0DT6djqSc" title="IA Generativa" allowfullscreen></iframe>
+                    </div>
+                    <p>A IA Generativa é capaz de criar conteúdo original, incluindo textos, imagens, músicas e vídeos.</p>
                 </div>
                 
-                <div class="card animated delay-2">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+                <div class="video-card animated delay-2">
                     <h3>Tendências da IA para o futuro</h3>
-                    <p>Nos próximos anos, veremos a IA se tornar mais contextual e personalizada, com avanços em aprendizado por reforço e sistemas capazes de entender emoções humanas.</p>
+                    <div class="small-video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/e8WaYyiS6a4" title="Tendências da IA" allowfullscreen></iframe>
+                    </div>
+                    <p>Nos próximos anos, veremos a IA se tornar mais contextual e personalizada.</p>
                 </div>
                 
-                <div class="card animated delay-3">
-                    <div class="card-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
+                <div class="video-card animated delay-3">
                     <h3>IA no cotidiano das pessoas</h3>
-                    <p>Assistentes virtuais, recomendações personalizadas, diagnósticos médicos e carros autônomos são exemplos de como a IA já está presente no nosso dia a dia.</p>
+                    <div class="small-video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/xfVUmd545KU" title="IA no cotidiano" allowfullscreen></iframe>
+                    </div>
+                    <p>Assistentes virtuais, recomendações personalizadas, diagnósticos médicos.</p>
                 </div>
                 
-                <div class="card animated delay-4">
-                    <div class="card-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
+                <div class="video-card animated delay-4">
                     <h3>IA para aprendizado</h3>
-                    <p>Ferramentas de IA personalizam o ensino, adaptando-se ao ritmo de cada aluno. Sistemas tutores inteligentes identificam dificuldades e oferecem conteúdos específicos.</p>
+                    <div class="small-video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/JSPILvOmyh4" title="IA para aprendizado" allowfullscreen></iframe>
+                    </div>
+                    <p>Ferramentas de IA personalizam o ensino, adaptando-se ao ritmo de cada aluno.</p>
                 </div>
             </div>
         </div>
@@ -580,7 +637,7 @@
                     </div>
                 </div>
                 <figure class="project-image animated delay-4">
-                    <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='350' viewBox='0 0 500 350'%3E%3Crect fill='%234a2a7c' width='500' height='350'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='24' x='50%25' y='50%25' text-anchor='middle'%3EProjeto SETEC - Desenvolvimento de Jogos%3C/text%3E%3C/svg%3E" alt="Ilustração do projeto para SETEC">
+                    <img src="sessao.jpg" alt="Projeto SETEC - Desenvolvimento de Jogos">
                 </figure>
             </div>
         </div>
